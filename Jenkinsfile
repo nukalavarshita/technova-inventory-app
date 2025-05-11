@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/nukalavarshita/todo-app.git'
+                git credentialsId: 'github-token', url: 'https://github.com/nukalavarshita/todo-app.git'
             }
         }
 
