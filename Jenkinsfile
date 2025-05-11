@@ -1,29 +1,25 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clone Repo') {
+        stage('Checkout') {
             steps {
-                git credentialsId: '0d89a143-e44e-4f0e-9968-65978a0bc0b2', url: 'https://github.com/nukalavarshita/todo-app.git'
+                git credentialsId: 'your-credentials-id', url: 'https://github.com/nukalavarshita/technova-inventory-app.git', branch: 'main'
             }
         }
-
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                bat 'docker build -t python-todo-cli .'
+                echo 'Building...'
             }
         }
-
-        stage('Run Docker Container') {
+        stage('Test') {
             steps {
-                bat 'docker run --rm python-todo-cli'
+                echo 'Testing...'
             }
         }
-    }
-
-    post {
-        always {
-            echo 'Pipeline execution completed.'
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
         }
     }
 }
