@@ -1,13 +1,7 @@
-FROM node:14
+FROM python:3.10-slim
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY app.py .
 
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
+CMD ["python", "app.py"]
