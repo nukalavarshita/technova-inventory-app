@@ -1,40 +1,29 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_HOME = tool name: 'NodeJS', type: 'NodeJSInstallation'
-    }
-
     stages {
-        stage('Install dependencies') {
+        stage('Clone Repo') {
             steps {
-                bat 'npm install'
+                git 'https://github.com/nukalavarshita/todo-app.git'
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                bat 'npm run build'
+                bat 'docker build -t python-todo-cli .'
             }
         }
 
-        stage('Test') {
+        stage('Run Docker Container') {
             steps {
-                bat 'npm test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Replace this with your deploy command (if any)
-                bat 'echo Deploying the app'
+                bat 'docker run --rm python-todo-cli'
             }
         }
     }
 
     post {
         always {
-            echo 'Cleaning up...'
+            echo 'Pipeline execution completed.'
         }
     }
 }
