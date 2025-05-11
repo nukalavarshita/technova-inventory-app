@@ -1,35 +1,40 @@
 pipeline {
     agent any
 
+    environment {
+        NODE_HOME = tool name: 'NodeJS', type: 'NodeJSInstallation'
+    }
+
     stages {
-        stage('Clone') {
+        stage('Install dependencies') {
             steps {
-                git 'https://github.com/nukalavarshita/technova-inventory-app.git'
+                bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the application...'
+                bat 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t technova-inventory .'
+                bat 'npm test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
+                // Replace this with your deploy command (if any)
+                bat 'echo Deploying the app'
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up...'
         }
     }
 }
