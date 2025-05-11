@@ -4,10 +4,9 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/nukalavarshita/technova-inventory-app.git'
+                git branch: 'main', url: 'https://github.com/nukalavarshita/technova-inventory-app.git'
             }
         }
-
         stage('Build') {
             steps {
                 echo 'Building the application...'
