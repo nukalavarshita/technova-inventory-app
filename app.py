@@ -1,5 +1,5 @@
 # app.py
-todos = ["Buy groceries", "Finish homework", "Clean the house", "Make new Commit"]
+todos = ["Buy groceries", "Finish homework", "Clean the house", "More tasks"]
 
 def display_todos():
     print("To-Do List:")
